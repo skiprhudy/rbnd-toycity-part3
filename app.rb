@@ -44,7 +44,7 @@ puts walter.name # Should return "Walter Latimer"
 
 # TRANSACTIONS
 
-transaction = Transaction.new(walter, nanoblock)
+transaction = PurchaseTrans.new(walter, nanoblock)
 
 puts transaction.id # Should return 1
 puts transaction.product == nanoblock # Should return true
@@ -77,8 +77,22 @@ walter.transaction_history
 puts
 puts "Walter Latimer returns Nano Block Empire State Building ..."
 puts "Boss runs Walter Latimer's latest Transaction History:"
-walter.return_item('Nano Block Empire State Building')
+walter.return_items('Nano Block Empire State Building',1)
 walter.transaction_history
+
+puts
+puts "Julia Van Cleve orders Iron Man vs. Ultron"
+ultron = Product.find_by_title("LEGO Iron Man vs. Ultron")
+julia = Customer.find_by_name("Julia Van Cleve")
+julia.purchase(ultron)
+
+puts
+puts "Boss runs report on Julia"
+julia.transaction_history
+
+puts
+puts "Boss runs ALL transaction history"
+Transaction.list_all_transactions
 
 puts
 puts "Total transactions: #{Transaction.all.count}" #should return 5
